@@ -33,10 +33,10 @@ include "php/connection.php";
               <i class="fas fa-tree mr-2"></i><?php
                                                     if($_SESSION["role"] == 0){
                                                         $name = $_SESSION["username"];
-                                                        echo $name;
+                                                        echo ucwords($name);
                                                     }else{
                                                         $name = $_SESSION["username"];
-                                                        echo $name . " Real Estate";
+                                                        echo ucwords($name) . " Real Estate";
                                                     }
                                                 ?>
             </a>
