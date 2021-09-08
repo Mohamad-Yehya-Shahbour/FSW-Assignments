@@ -55,13 +55,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<form action="php/uploaditem.php" method="post" id="uploadform">
 					<input id="title" class="text"  type="text" name="title" placeholder="title" required="">
 					<input id="description" class="text" type="text" name="description" placeholder="description" required="">
-					<input id="customFile" type="file" class="text" name="image"  />
+					<input id="customFile" type="file" class="text-white btn" name="image"  />
 					<div class="wthree-text">
 						<div class="clear"> </div>
 					</div>
 					<input id="submit"type="submit" value="UPLOAD">
 				</form>
-				<p><a href="home.php"> BACK </a>to my products </p>
+				<p><a href="home.php"> BACK </a>To My Lands </p>
 			</div>
 		</div>
 		

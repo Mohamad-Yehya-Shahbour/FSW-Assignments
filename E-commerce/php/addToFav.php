@@ -1,7 +1,7 @@
 <?php
 include "connection.php";
 
-print_r($_POST);
+//print_r($_POST);
 
 $userid = $_POST["userid"];
 $productid = $_POST["productid"];

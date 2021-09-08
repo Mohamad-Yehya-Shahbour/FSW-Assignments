@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2021 at 04:36 AM
+-- Generation Time: Sep 08, 2021 at 04:32 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -40,13 +40,15 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`Id`, `Title`, `Description`, `ImageUrl`, `SellerId`) VALUES
-(2, 'hello', 'descrption', 'images/wqwqwqwq.jpg', 4),
-(3, 'hello', 'descrption', 'images/wqwqwqwq.jpg', 4),
-(4, 'HELLO', 'ITS ME', 'images/wqwqwqwq.jpg', 4),
-(6, 'product2', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/wqwqwqwq.jpg', 6),
-(7, 'product3', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/wqwqwqwq.jpg', 6),
-(8, 'product4', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/wqwqwqwq.jpg', 6),
-(9, 'product5', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/wqwqwqwq.jpg', 6);
+(16, 'LAND1', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 4),
+(17, 'LAND2', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 4),
+(18, 'LAND3', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 4),
+(19, 'LAND4', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 4),
+(20, 'LAND5', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 4),
+(21, 'LAND11', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 6),
+(22, 'LAND12', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 6),
+(23, 'LAND13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 6),
+(24, 'LAND14', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown', 'images/land.jpg', 6);
 
 -- --------------------------------------------------------
 
@@ -64,8 +66,10 @@ CREATE TABLE `userproducts` (
 --
 
 INSERT INTO `userproducts` (`UserId`, `ProductId`) VALUES
-(5, 9),
-(5, 6);
+(5, 16),
+(5, 18),
+(5, 21),
+(5, 24);
 
 -- --------------------------------------------------------
 
@@ -89,7 +93,8 @@ INSERT INTO `users` (`Id`, `Name`, `Email`, `Pass`, `Role`) VALUES
 (4, 'yehya', 'yehya@gmail.com', 'b994334782e66b7facf0404023e3b63ba8186fa18a5a5870e04c9a060cafc42f', 1),
 (5, 'yehya2', 'yehya2@gmail.com', 'b994334782e66b7facf0404023e3b63ba8186fa18a5a5870e04c9a060cafc42f', 0),
 (6, 'seller', 'yehya3@gmail.com', 'b994334782e66b7facf0404023e3b63ba8186fa18a5a5870e04c9a060cafc42f', 1),
-(7, 'buyer', 'yehya4@gmail.com', 'b994334782e66b7facf0404023e3b63ba8186fa18a5a5870e04c9a060cafc42f', 0);
+(7, 'buyer', 'yehya4@gmail.com', 'b994334782e66b7facf0404023e3b63ba8186fa18a5a5870e04c9a060cafc42f', 0),
+(8, 'yehyaa', 'yehyaa@gmail.com', 'b994334782e66b7facf0404023e3b63ba8186fa18a5a5870e04c9a060cafc42f', 1);
 
 --
 -- Indexes for dumped tables
@@ -115,13 +120,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

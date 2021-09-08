@@ -22,13 +22,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- web font -->
 <link href="style/font.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet">
+<link href="style/bootstrap4.min.css" rel="stylesheet">
 <!-- //web font -->
 </head>
 <body>
 
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
-		<h1>
+		<h1 class="text-white">
 			<?php
 				if (!empty($_SESSION["checking"])){
 				$msg = $_SESSION["checking"];
@@ -41,17 +42,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<form action="php/login.php" method="post" id="loginfrom">
 					<input id="email" class="text email" type="email" name="email" placeholder="Email" required="">
 					<input  id="pass" class="text" type="password" name="pass" placeholder="Password" required="">
-                    <div class="form-check">
+                    <div class="form-check ml-3 mt-3">
 						<input class="form-check-input" type="radio" value="0"
 						 name="flexRadioDefault" id="flexRadioDefault1">
-						<label class="form-check-label" for="flexRadioDefault1">
+						<label class="form-check-label text-white" for="flexRadioDefault1">
 						  Buyer
 						</label>
 					  </div>
-					  <div class="form-check">
+					  <div class="form-check ml-3 mt-1">
 						<input class="form-check-input" type="radio" value="1"
 						 name="flexRadioDefault" id="flexRadioDefault2" checked>
-						<label class="form-check-label" for="flexRadioDefault2">
+						<label class="form-check-label text-white" for="flexRadioDefault2">
 						  Seller
 						</label>
 					  </div>

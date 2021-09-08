@@ -41,6 +41,8 @@ $stmt1->execute();
 $result = $stmt1->get_result();
 $row = $result->fetch_assoc();
 
+
+
 if(empty($row)){
     $sql2 = "INSERT INTO users (Name, Email, Pass, Role) VALUES (?, ?, ?, ?);"; #add the new user to the database
     $stmt2 = $connection->prepare($sql2);

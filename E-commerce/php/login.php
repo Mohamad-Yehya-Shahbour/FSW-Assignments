@@ -48,17 +48,12 @@ while( $rows =  $result2->fetch_assoc() ){
 
 
 
-$result3 = mysqli_query($connection, "SELECT * FROM `products`"); #getting all  products for buyers
 
-$arr_rows2 = array();
-while( $rows2 =  $result3->fetch_assoc() ){
-    $arr_rows2[] = $rows2;
-}
+$count = mysqli_num_rows($result);
 
 
 
-
-if(!empty($row)){
+if($count != 0){
     $Name = $row["Name"];
     $Id = $row["Id"];
     session_start();

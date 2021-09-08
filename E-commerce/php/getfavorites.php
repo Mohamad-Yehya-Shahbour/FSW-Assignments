@@ -1,5 +1,5 @@
 <?php
-session_start();
+/* session_start();
 
 $server = "localhost";
 $username = "root";
@@ -13,7 +13,7 @@ if($connection->connect_error){
 }
 
 
-
+//print_r($_POST);
 $userid = $_POST['userid'];
 
 
@@ -26,6 +26,6 @@ while( $rows3 =  $result3->fetch_assoc() ){
 $_SESSION[ 'result3' ] = $arr_rows3;
 
 
-header('location: ../favorites.php');
+header('location: ../favorites.php'); */
 
 ?>

@@ -4,9 +4,6 @@ session_start();
 ?>
 
 
-
-
-
 <!--
 Author: Colorlib
 Author URL: https://colorlib.com
@@ -26,6 +23,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- web font -->
 <link href="style/font.css" rel="stylesheet">
 <link href="style/style.css" rel="stylesheet" type="text/css" media="all">
+<link href="style/bootstrap4.min.css" rel="stylesheet">
 
 
 
@@ -37,7 +35,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 	<!-- main -->
 	<div class="main-w3layouts wrapper">
-		<h1>
+		<h1 class="text-white">
 			<?php
 				if (!empty($_SESSION["checking"])){
 				$msg = $_SESSION["checking"];
@@ -53,17 +51,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input id="email" class="text email" type="email" name="email" placeholder="Email" required="">
 					<input id="pass" class="text" type="password" name="pass" placeholder="Password" required="">
 					<input id="confirmpass" class="text w3lpass" type="password" name="confirmpass" placeholder="Confirm Password" required="">
-					<div class="form-check">
+					<div class="form-check  ml-3 mt-3">
 						<input class="form-check-input" type="radio"
 						 name="flexRadioDefault" id="flexRadioDefault1" value="0">
-						<label class="form-check-label" for="flexRadioDefault1">
+						<label class="form-check-label text-white" for="flexRadioDefault1">
 						  Buyer
 						</label>
 					  </div>
-					  <div class="form-check">
+					  <div class="form-check ml-3 mt-1">
 						<input class="form-check-input" type="radio"
 						 name="flexRadioDefault" id="flexRadioDefault2" value="1" checked>
-						<label class="form-check-label" for="flexRadioDefault2">
+						<label class="form-check-label text-white" for="flexRadioDefault2">
 						  Seller
 						</label>
 					  </div>
@@ -72,7 +70,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 					<input id="signupsubmit"type="submit" value="SIGNUP">
 				</form>
-				<p>Already have an Account? <a href="login.html"> Login Now!</a></p>
+				<p>Already have an Account? <a href="login.php"> Login Now!</a></p>
 			</div>
 		</div>
 		
