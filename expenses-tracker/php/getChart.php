@@ -1,7 +1,12 @@
 <?php
 include "connection.php";
 
-$userId = $_GET["userId"];
+if (isset($_GET["userId"])){
+    $userId = $_GET["userId"];
+}else{
+    $userId = $_GET["id"];
+}
+
 
 
 

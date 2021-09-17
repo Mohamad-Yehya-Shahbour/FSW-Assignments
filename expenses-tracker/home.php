@@ -143,7 +143,7 @@ $Id = $_SESSION["userId"];
     </div>
 
     <script>
-        async function fetchAPI(){
+        async function fetchExpenses(){
 				const response = await fetch('http://localhost/expense-tracker/php/expenses.php?id=<?php echo $Id ?>');
 				if(!response.ok){
 					const message = "An Error has occured";
@@ -153,7 +153,7 @@ $Id = $_SESSION["userId"];
 				return results; 
 			}
 
-            fetchAPI().then(results => {
+            fetchExpenses().then(results => {
                         for(var i =0; i < results.length; i++){
                             let row = 
                                         `
@@ -372,9 +372,48 @@ $Id = $_SESSION["userId"];
 
         
 
-       /*  $(document).ready(function () {
-            
-        }); */
+        $(document).ready(function () {
+            async function fetchChart(){
+				const response = await fetch('http://localhost/expense-tracker/php/getChart.php?id=<?php echo $Id ?>');
+				if(!response.ok){
+					const message = "An Error has occured";
+					throw new Error(message);
+				}
+				const results = await response.json();
+				return results; 
+			}
+
+            fetchChart().then(results => {
+                            //const myJSONchart1 = JSON.parse(results);
+                            var names =[];
+                            var sums = [];
+                            for (var j = 0; j < results.length; j++){
+                                names.push(results[j].Name);
+                                sums.push(results[j].sum);
+                            }
+        
+                            // PIE CHART SCRIPT
+                            var ctx = $("#chart-line");
+                            var myLineChart = new Chart(ctx, {
+                                type: 'pie',
+                                data: {
+                                    labels:names ,
+                                    datasets: [{
+                                        data: sums,
+                                        backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
+                                    }]
+                                },
+                                options: {
+                                    title: {
+                                        display: true,
+                                        text: 'Expenses'
+                                    }
+                                }
+                            });
+                        }).catch(error => {
+                            console.log(error.message);
+                        });
+        });
 
 
 
