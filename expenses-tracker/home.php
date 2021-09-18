@@ -60,6 +60,45 @@ $Id = $_SESSION["userId"];
         </div>
     </div>
 
+      <!-- popup form edit item-->
+      <div id="modalDialogEdit" class="modal">
+        <div class="modal-content animate-top">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit items</h5>
+                <button id="editClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form method="post" id="contactFrmEdit">
+                <div class="modal-body">
+                    <!-- Form submission status -->
+                    <div class="response"></div>
+
+                    <!-- Contact form -->
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number"  id="editamount" name="amount" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense_date">Date:</label>
+                        <input type="date" id="editexpenseDate" name="expenseDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input type="text" id="editcategoryName" name="categoryName" class="form-control" required>
+                    </div>
+                    <input type="hidden" id="userIdEdit" name="userId" value="<?php echo $Id ?>">
+
+
+                </div>
+                <div class="modal-footer">
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- popup form categ-->
     <div id="modalDialogCateg" class="modal">
         <div class="modal-content animate-top">
@@ -90,6 +129,9 @@ $Id = $_SESSION["userId"];
         </div>
     </div>
 
+
+    
+
     <button type="button" id="add_item" class="btn btn-success m-3">Add Item</button>
     <button type="button" id="add_categ" class="btn btn-success ml-3">Add Categ</button>
 
@@ -103,6 +145,7 @@ $Id = $_SESSION["userId"];
                 <th scope="col">Category</th>
                 <th scope="col">Amount</th>
                 <th scope="col">date</th>
+                <th scope="col">action</th>
             </tr>
             </thead>
             <tbody id="myTable">
@@ -151,7 +194,90 @@ $Id = $_SESSION["userId"];
 				}
 				const results = await response.json();
 				return results; 
+		}
+
+        async function deleteExpense(id){
+            const response = await fetch("http://localhost/expense-tracker/php/deleteExpense.php?id=" + id);
+            
+            if(!response.ok){
+                const message = "ERROR OCCURED";
+                throw new Error(message);
+            }
+            
+            const article = await response.json();
+            return article;
+        }
+
+        async function editExpense(id){
+            const response = await fetch('http://localhost/expense-tracker/php/editExpense.php?id='+id,{
+                method : "POST",
+                body : new URLSearchParams({
+				"amount": $("#editamount").val(),
+				"expenseDate": $("#editexpenseDate").val(),
+				"categoryName": $("#editcategoryName").val(),
+                "userId": $("#userIdEdit").val(),
+			})
+            });
+            
+            if(!response.ok){
+                const message = "ERROR OCCURED";
+                throw new Error(message);
+            }
+            
+            const results = await response.json();
+            return results;
+        }
+
+        /* $(document).ready(function () {
+            $('#contactFrmEdit').submit(async function (e) {
+                                    e.preventDefault();
+                                    $('.modal-body').css('opacity', '1');
+                                    // console.log($("#contactFrmEdit").serialize());
+                                    await editExpense($(this).attr("id")).then(results =>{
+                                        console.log(results);
+                                        let row = 
+                                        `
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td>${results.categoryName}</td>
+                                                <td>${results.amount}</td>
+                                                <td>${results.expenseDate}</td>
+                                                <td>
+                                                    <button id="${results.id}" type="button" class="btn btn-outline-danger deleteBtn">delete</button>
+                                                    <button id="${results.id}" type="button" class="btn btn-outline-warning editBtn">edit</button>
+                                                </td>
+                                            </tr>
+                                        `;
+                                        //console.log(row);
+                                        //$('#myTable').append(row);
+                                    }).catch(error => {
+                                        console.log(error.message);
+                                    });
+                                    //$(this).closest("tr").hide();
+                                    editModal.hide();
+                                });
+        }); */
+        /* async function editExpense(id){
+            try{
+				result = await $.ajax({
+					type: "POST",
+                    data: $("#contactFrm").serialize(),
+                    url: "http://localhost/expense-tracker/php/editExpense.php?id="+id,
+                    success:  function(data){
+                                    console.log(data);
+				    },
+                    error: function(xhr, status, error){
+					    console.log(error);
+				    } 
+				})
+			}catch(error) {
+				console.log(error);
 			}
+        } */
+
+        
+        
+        
 
             fetchExpenses().then(results => {
                         for(var i =0; i < results.length; i++){
@@ -162,10 +288,27 @@ $Id = $_SESSION["userId"];
                                                 <td>${results[i].Name}</td>
                                                 <td>${results[i].Value}</td>
                                                 <td>${results[i].Date}</td>
+                                                <td>
+                                                    <button id="${results[i].expId}" type="button" class="btn btn-outline-danger deleteBtn">delete</button>
+                                                    <button id="${results[i].expId}" type="button" class="btn btn-outline-warning editBtn">edit</button>
+                                                </td>
                                             </tr>
                                         `;
                             //console.log(row);
                             $('#myTable').append(row);
+                            $(".deleteBtn").click(async function() {
+                               await deleteExpense($(this).attr("id"));
+                               $(this).closest("tr").hide();
+                               await getChart();
+                                });
+                            $(".editBtn").click(async function() {
+                                editModal.show();
+                                
+                               /* await editExpense($(this).attr("id"));
+                               await $(this).closest("tr").hide();
+                               await getChart(); */
+                               
+                                });
                         }
                     }).catch(error => {
                         console.log(error.message);
@@ -212,17 +355,27 @@ $Id = $_SESSION["userId"];
                     url: "http://localhost/expense-tracker/php/addItem.php",
                     success:  function(data){
                                     const myJSON = JSON.parse(data); 
-                                    //console.log(myJSON);
+                                    console.log(myJSON);
                                     let row2 = 
                                                 `
-                                                    <tr>
+                                                    <tr id="${myJSON["id"]}">
                                                         <th scope="row"></th>
                                                         <td>${myJSON["categoryName"]}</td>
                                                         <td>${myJSON["amount"]}</td>
                                                         <td>${myJSON["expenseDate"]}</td>
+                                                        <td>
+                                                            <button id="${myJSON["id"]}" type="button" class="btn btn-outline-danger deleteBtn">delete</button>
+                                                            <button id="${myJSON["id"]}" type="button" class="btn btn-outline-warning editBtn">edit</button>
+                                                        </td>
                                                     </tr>
                                                 `;
                                     $('#myTable').append(row2);
+                                    $(".deleteBtn").click(async function() {
+                                        await deleteExpense($(this).attr("id"));
+                                        await $(this).closest("tr").hide();
+                                        await getChart();
+
+                                        });
 				    },
                     error: function(xhr, status, error){
 					    console.log(error);
@@ -413,6 +566,18 @@ $Id = $_SESSION["userId"];
                         }).catch(error => {
                             console.log(error.message);
                         });
+        });
+
+
+        var editModal = $('#modalDialogEdit');
+
+        var editSpan = $("#editClose");
+
+        // When the user clicks anywhere outside of the modal, close it
+        $('body').bind('click', function (e) {
+            if ($(e.target).hasClass("modal")) {
+                editModal.hide();
+            }
         });
 
 

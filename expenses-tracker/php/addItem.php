@@ -21,7 +21,9 @@ $sql2="INSERT INTO expenses (`Value`, `Date`, `UserId`, `CategoryId`) VALUES (?,
 $stmt2 = $connection->prepare($sql2);
 $stmt2->bind_param("ssii", $amount, $expenseDate, $userId, $categoryId);
 $stmt2->execute();
+$id = $stmt2->insert_id;
 
+$_REQUEST["id"] = $id;
 /*
 $arr_rows = array();
 while( $rows =   ){

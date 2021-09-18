@@ -3,7 +3,7 @@ include "connection.php";
 
 $userid = $_GET["id"];
 
-$sql1="SELECT * FROM expenses, categories WHERE expenses.CategoryId = categories.Id AND expenses.UserId = ? ;"; #Check if the user already exists in the database
+$sql1="SELECT *, expenses.Id as expId  FROM expenses, categories WHERE expenses.CategoryId = categories.Id AND expenses.UserId = ? ;"; #Check if the user already exists in the database
 $stmt1 = $connection->prepare($sql1);
 $stmt1->bind_param("i",$userid,);
 $stmt1->execute();
