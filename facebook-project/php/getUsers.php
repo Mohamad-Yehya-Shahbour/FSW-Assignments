@@ -12,17 +12,15 @@ AND users.Id <> $userId
 AND users.Id NOT IN (SELECT connections.Friend_Id
                         FROM connections, users
                         WHERE connections.User_Id= users.Id
-                        AND connections.User_Id=$userId
-                        AND connections.IsBlocked=1
-                        OR(connections.IsPending=0 AND connections.IsBlocked=0 And connections.IsDeclined=0)
+                        AND (connections.User_Id=$userId AND connections.IsBlocked=1)
+                        OR (connections.User_Id=$userId AND  connections.IsPending=0 AND connections.IsBlocked=0 And connections.IsDeclined=0)
 						)
                         AND users.Id
                         NOT IN (SELECT connections.User_Id
                         FROM connections, users
                         WHERE connections.Friend_Id= users.Id
-                        AND connections.Friend_Id=$userId
-                        AND connections.IsBlocked=1
-                        OR(connections.IsPending=0 AND connections.IsBlocked=0 And connections.IsDeclined=0)
+                        AND (connections.Friend_Id=$userId AND connections.IsBlocked=1)
+                        OR(connections.Friend_Id=$userId AND connections.IsPending=0 AND connections.IsBlocked=0 And connections.IsDeclined=0)
                         ) ;";
 
 $stmt1 = $connection->prepare($sql1);
